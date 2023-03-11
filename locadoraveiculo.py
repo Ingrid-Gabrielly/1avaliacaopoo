@@ -1,11 +1,12 @@
+#Classe Veiculo
 class Veiculo(App):
-    def __init__(self, marca, modelo, ano, categoria, transmissao, combustivel):
-        self.marca
-        self.modelo
-        self.ano
-        self.categoria
-        self.transmissao
-        self.combustivel
+    def __init__(self, marca, modelo, ano, categoria, transmissao, combustivel):  #função com os atributos necessários
+        self.marca #marca do veículo
+        self.modelo #modelo do veículo
+        self.ano #ano do veículo
+        self.categoria #categorias do veículo
+        self.cambio #o veículo é manual ou automático
+        self.combustivel #o tipo de combustível do veículo
 
     def listarcarro(self):
         if len(self.ListaCarro)>0:
@@ -14,7 +15,7 @@ class Veiculo(App):
                 print(f"Placa: {car['placa']}")
                 print(f"Ano: {car['ano']}")
                 print(f"Categoria: {car['categoria']}")
-                (f"Transmissão: {car['transmissao']}")
+                print(f"Câmbio: {car['cambio']}")
                 print(f"Combustível: {car['combustivel']}")
                 print(f"Marca: {car['marca']}")
                 print(f"Modelo: {car['modelo']}")
@@ -24,15 +25,15 @@ class Veiculo(App):
         else:
             print("\nOps... Nenhum veículo para listar!")
 
-    def buscarcarro(self):
+    def buscarcarro(self): #função para buscar carro já cadastrado na locadora
         if len(self.ListaCarro) > 0:
-            self.placa = str(input("Digite a placa: ")).upper()
+            self.placa = str(input("Digite a placa: ")).upper() #o carro cadastrado será procurado pela placa informada
             for car in self.ListaCarro:
                 if car['placa'] == self.placa:
                     print(f"Placa: {car['placa']}")
                     print(f"Ano: {car['ano']}")
                     print(f"Categoria: {car['categoria']}")
-                    print(f"Transmissão: {car['transmissao']}")
+                    print(f"Câmbio: {car['cambio']}")
                     print(f"Combustível: {car['combustivel']}")
                     print(f"Marca: {car['marca']}")
                     print(f"Modelo: {car['modelo']}")
@@ -41,7 +42,7 @@ class Veiculo(App):
         else:
             print("Ops... Nenhum veículo cadastrado")
 
-    def buscarcarro_alugar(self):
+    def buscarcarro_alugar(self): #função para ver a disponibilidade de veículos para alugar
         if len(self.ListaCarro)>0:
             self.placa = str(input("Digite a placa: ")).upper()
             for car in self.ListaCarro:
@@ -52,7 +53,7 @@ class Veiculo(App):
                         print(f"Placa: {car['placa']}")
                         print(f"Ano: {car['ano']}")
                         print(f"Categoria: {car['categoria']}")
-                        print(f"Transmissão: {car['transmissao']}")
+                        print(f"Câmbio: {car['cambio']}")
                         print(f"Combustível: {car['combustivel']}")
                         print(f"Marca: {car['marca']}")
                         print(f"Modelo: {car['modelo']}")
@@ -65,91 +66,91 @@ class Veiculo(App):
         else:
             print("Nenhum veículo disponível para alugar!")
 
-    def existe_carro(self):
+    def existecarro(self): #função para saber se existe algum carro cadastrado na locadora com a placa informada 
         if len(self.ListaCarro)>0:
             for car in self.ListaCarro:
                 if car['placa']==self.placa:
                     return True
         return False
 
-    def categoria(self): 
+    def categoria(self): #função para escolher qual categoria de carro deseja
         while True:
             print("1 - Sedan\n2 - Picape\n3 - SUV\n4 - Hatch")
             while True:
                 try:
-                    ctg= int(input("\nDigite: "))
+                    catego= int(input("\nDigite: "))
                     break
                 except ValueError:
                     print("\nNão aceita letras!\n")
-            if ctg==1:
+            if catego==1:
                 self.categoria= "SEDAN"
                 break
-            elif ctg==2:
+            elif catego==2:
                 self.categoria= "PICAPE"
-            elif ctg==3:
+            elif catego==3:
                 self.categoria= "SUV"
                 break
-            elif ctg==4:
+            elif catego==4:
                 self.categoria= "HATCH"
             else:
                 print("\nInválida")
 
-    def transmissao(self):
+    def cambio(self): #função para escolher se é um carro automático ou manual
         while True:
             print("\n1 - Manual\n2 - Automático")
             while True:
                 try:
-                    trns=int(input("\nDigite: "))
+                    transmissao=int(input("\nDigite: "))
                     break
                 except ValueError:
                     print("\nNão aceita letras!\n")
-            if trns==1:
-                self.transmissao= "MANUAL"
+            if transmissao==1:
+                self.cambio= "MANUAL"
                 break
-            elif trns==2:
-                self.transmissao= "AUTOMATICO"
+            elif transmissao==2:
+                self.cambio= "AUTOMATICO"
                 break
             else:
                 print("\nInválida")
 
-    def combustivel(self):
+    def combustivel(self): #função para escolher qual o tipo de combustível 
         while True:
             print("\n1 - Gasolina\n2 - Álcool\n3 - Flex\n4 - GNV\n5 - Diesel")
             while True:
                 try:
-                    cmbst=int(input("\nDigite: "))
+                    combust=int(input("\nDigite: "))
                     break
                 except ValueError:
                     print("Não aceita letras!\n")
-            if cmbst==1:
+            if combust==1:
                 self.combustivel= "GASOLINA"
                 break
-            elif cmbst==2:
+            elif combust==2:
                 self.combustivel= "ALCOOL"
                 break
-            elif cmbst==3:
+            elif combust==3:
                 self.combustivel= "FLEX"
                 break
-            elif cmbst==4:
+            elif combust==4:
                 self.combustivel= "GNV"
                 break
-            elif cmbst==5:
+            elif combust==5:
                 self.combustivel= "DIESEL"
                 break
             else:
                 print("\nInválida")
 
-    def novo_carro(self):
-        while True:
+    def novocarro(self): #função para cadastrar novo carro
+        while True: 
             self.placa = str(input("\n\nplaca: ")).upper()
             if not Carro.existe_carro(self):
                 break
             else:
-                print("\nJá cadastrado no sistema")
+                print("\nJá cadastrado no sistema") #se a placa digitada estiver no sistema, apresentará essa frase
                       
         self.ano=int(input("Ano: "))
         Veiculo.categoria(self)
-        Veiculo.transmissao(self)
+        Veiculo.cambio(self)
         Veiculo.combustivel(self)
 
         self.marca = str(input("Digite a marca: ")).upper()
@@ -159,7 +160,7 @@ class Veiculo(App):
             'placa': self.placa,
             'ano': self.ano,
             'categoria': self.categoria,
-            'transmissao': self.transmissao,
+            'cambio': self.cambio,
             'combustivel': self.combustivel,
             'marca': self.marca,
             'modelo': self.modelo,
@@ -168,13 +169,7 @@ class Veiculo(App):
         self.ListaCarro.append(carro)
         print(self.ListaCarro)
 
-
-                   
-
-                
-    
-
-
+#Classe Carro
 class Carro(Veiculo):
     def __init__(self, placa, km, valordiaria):
         self.placa
