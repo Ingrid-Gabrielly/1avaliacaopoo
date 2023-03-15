@@ -208,14 +208,14 @@ class Veiculo(App):
             print("\n1 - Manual\n2 - Automático")
             while True:
                 try:
-                    cambio=int(input("\nDigite: "))
+                    transmissao=int(input("\nDigite: "))
                     break
                 except ValueError:
                     print("\nNão aceita letras!\n")
-            if cambio==1:
+            if transmissao==1:
                 self.cambio= "MANUAL"
                 break
-            elif cambio==2:
+            elif transmissao==2:
                 self.cambio= "AUTOMATICO"
                 break
             else:
