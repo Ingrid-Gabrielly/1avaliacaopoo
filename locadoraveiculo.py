@@ -1,3 +1,111 @@
+
+class App(object):
+
+    def __init__(self):
+        self.ListadeClientes = []
+        self.ListadeCarros = []
+        self.AlugueldeCarro = []
+        self.menu()
+    
+    def alugar(self):
+        
+        self.cpf = str(input("Digite seu CPF: "))#cadastrar um novo cpf
+        while True:
+            if not Cliente.cliente_existente(self):#verificar se é um cpf já cadastrado
+                print("Novo Cadastro Realizado")
+                Cliente.cliente_novo(self)
+            else:
+                break
+            Carro.listar_carro(self)
+            Carro.buscar_carros_disponiveis(self)
+            App.lista_aluguel(self)
+
+    def lista_aluguel(self):
+        alugados = {
+            'nome': self.nome,
+            'cpf': self.cpf,
+            'placa': self.placa,
+            'categoria': self.categoria,
+            'ano': self.ano,
+            'cambio': self.cambio,
+            'combustivel': self.combustivel,
+            'marca': self.marca,
+            'modelo': self.modelo,
+            'aluguel': self.alugue
+        }
+        self.AlugueldeCarro.append(alugado)
+        print("Carro alugado!!")
+        print(self.AlugueldeCarro)
+
+        def lista_alugados(self):
+            if len(self.AlugueldeCarro) > 0:
+                for q, loc in enumerate(self.AlugueldeCarro):
+                    print(f"Carro {q+1}:")
+                    print(f"Nome: {loc['nome']}")
+                    print(f"CPF: {loc['cpf']}")
+                    print(f"Placa: {loc['placa']}")
+                    print(f"Categoria: {loc['categoria']}")
+                    print(f"Ano: {loc['ano']}")
+                    print(f"Cambio: {loc['cambio']}")
+                    print(f"Combustível: {loc['combustivel']}")
+                    print(f"Marca: {loc['marca']}")
+                    print(f"Modelo: {loc['modelo']}")
+                    print(f"Aluguel:{loc['aluguel']}")
+                    print(f"Número de veículos alugados é: {len(self.AluguelCarro)}\n")
+                else:
+                     print("\nNenhum veículo alugado! ")
+        def menu(self):
+
+            while True:
+                 print("Bem Vindo a locadora DESESPERADOS")
+                 print("1 - Cadastrar novo veículo")
+                 print("2 - Cadastrar novo cliente")
+                 print("3 - Locação de veículo")
+                 print("4 - Relatório de locação")
+                 print("5 - Busca de veículos cadastrados")
+                 print("6 - Busca de clientes cadastrados")
+                 print("7 - Relatório de veículos cadastrados")
+                 print("8 - Relatório de clientes cadastrados")
+                 print("9 - Finalizar o programa!  ")
+ 
+                 while True:
+                    try:
+                        opc = int(input("\nDigite: "))
+                        break
+                    except ValueError:
+                        print("\nNão aceita letras!\n")
+ 
+                    if opc == 1:
+                        Carro.carro_novo(self)
+ 
+                    elif opc == 2:
+                         Cliente.cliente_novo(self)
+ 
+                    elif opc == 3:
+                         App.alugar(self)
+ 
+                    elif opc == 4:
+                        App.lista_aluguel(self)
+ 
+                    elif opc == 5:
+                        Carro.buscar_carro(self)
+ 
+                    elif opc == 6:
+                        Cliente.buscar_cliente(self)
+ 
+                    elif opc == 7:
+                        Carro.listar_carro(self)
+ 
+                    elif opc == 8:
+                        Cliente.listar_cliente(self)
+ 
+                    elif opc == 9: 
+                        print("\nFinalizado!!!")
+                        break
+ 
+                    else:
+                         print("\nInválido!\n")
+
 #Classe Veiculo
 class Veiculo(App):
     def __init__(self, marca, modelo, ano, categoria, transmissao, combustivel):  #função com os atributos necessários
@@ -9,8 +117,8 @@ class Veiculo(App):
         self.combustivel #o tipo de combustível do veículo
 
     def listarcarro(self):
-        if len(self.ListaCarro)>0:
-            for i, car in enumerate(self.ListaCarro):
+        if len(self.ListadeCarro)>0:
+            for i, car in enumerate(self.ListadeCarro):
                 print(f"Carro {i+1}: ")
                 print(f"Placa: {car['placa']}")
                 print(f"Ano: {car['ano']}")
@@ -21,14 +129,14 @@ class Veiculo(App):
                 print(f"Modelo: {car['modelo']}")
                 print(f"Aluguel:{car['aluguel']}")
 
-            print(f"Total de veículos é: {len(self.ListaCarro)}\n")
+            print(f"Total de veículos é: {len(self.ListadeCarro)}\n")
         else:
             print("\nOps... Nenhum veículo para listar!")
 
     def buscarcarro(self): #função para buscar carro já cadastrado na locadora
-        if len(self.ListaCarro) > 0:
+        if len(self.ListadeCarro) > 0:
             self.placa = str(input("Digite a placa: ")).upper() #o carro cadastrado será procurado pela placa informada
-            for car in self.ListaCarro:
+            for car in self.ListadeCarro:
                 if car['placa'] == self.placa:
                     print(f"Placa: {car['placa']}")
                     print(f"Ano: {car['ano']}")
@@ -43,9 +151,9 @@ class Veiculo(App):
             print("Ops... Nenhum veículo cadastrado")
 
     def buscarcarro_alugar(self): #função para ver a disponibilidade de veículos para alugar
-        if len(self.ListaCarro)>0:
+        if len(self.ListadeCarro)>0:
             self.placa = str(input("Digite a placa: ")).upper()
-            for car in self.ListaCarro:
+            for car in self.ListadeCarro:
                 if car['aluguel'] =="ALUGADO":
                     print("Nenhum veículo disponível para alugar!")
                 else:
@@ -67,8 +175,8 @@ class Veiculo(App):
             print("Nenhum veículo disponível para alugar!")
 
     def existecarro(self): #função para saber se existe algum carro cadastrado na locadora com a placa informada 
-        if len(self.ListaCarro)>0:
-            for car in self.ListaCarro:
+        if len(self.ListadeCarro)>0:
+            for car in self.ListadeCarro:
                 if car['placa']==self.placa:
                     return True
         return False
@@ -100,14 +208,14 @@ class Veiculo(App):
             print("\n1 - Manual\n2 - Automático")
             while True:
                 try:
-                    transmissao=int(input("\nDigite: "))
+                    cambio=int(input("\nDigite: "))
                     break
                 except ValueError:
                     print("\nNão aceita letras!\n")
-            if transmissao==1:
+            if cambio==1:
                 self.cambio= "MANUAL"
                 break
-            elif transmissao==2:
+            elif cambio==2:
                 self.cambio= "AUTOMATICO"
                 break
             else:
@@ -166,8 +274,8 @@ class Veiculo(App):
             'modelo': self.modelo,
             'aluguel': self.aluguel
         }
-        self.ListaCarro.append(carro)
-        print(self.ListaCarro)
+        self.ListadeCarro.append(carro)
+        print(self.ListadeCarro)
 
 #Classe Carro
 class Carro(Veiculo):
@@ -177,26 +285,26 @@ class Carro(Veiculo):
         self.valordiaria
 
 #CLASSE CLIENTE
-class Cliente(Locadora):
+class Cliente(App):
  
     def __init__(self, nome, id):
         self.nome = nome
         self.id = id
  
     def listar_cliente(self):
-        if len(self.ListaCliente) > 0:
-            for i, clt in enumerate(self.ListaCliente):
+        if len(self.ListadeCliente) > 0:
+            for i, clt in enumerate(self.ListadeCliente):
                 print(f"\nCliente {i+1}:")
                 print(f"Nome: {clt['nome']}")
                 print(f"ID: {clt['id']}")
-            print(f"O total de clientes é: {len(self.ListaCliente)}\n")
+            print(f"O total de clientes é: {len(self.ListadeCliente)}\n")
         else:
             print("\nNão há cliente para listar!\n")
  
     def buscar_cliente(self):
-        if len(self.ListaCliente) > 0:
+        if len(self.ListadeCliente) > 0:
             self.cpf = str(input("Digite o ID: ")).upper()
-            for car in self.ListaCliente:
+            for car in self.ListadeCliente:
                 if car['id'] == self.cpf:
                     print(f"\nNome: {car['nome']}")
                     print(f"ID: {car['id']}")
@@ -205,13 +313,13 @@ class Cliente(Locadora):
             print("\nNenhum cliente cadastrado no sistema!\n")
  
     def existe_cliente(self):
-        if len(self.ListaCliente) > 0:
-            for clt in self.ListaCliente:
+        if len(self.ListadeCliente) > 0:
+            for clt in self.ListadeCliente:
                 if clt['id'] == self.id:
                     return True
         return False
  
-    def novo_cliente(self):
+    def cliente_novo(self):
         while True:
             self.id = str(input("Digite a ID: "))
             if not Cliente.existe_cliente(self):
@@ -224,8 +332,8 @@ class Cliente(Locadora):
             'id': self.id
         }
  
-        self.ListaCliente.append(usuario)
-        print(self.ListaCliente)
+        self.ListadeCliente.append(usuario)
+        print(self.ListadeCliente)
 
     
 
