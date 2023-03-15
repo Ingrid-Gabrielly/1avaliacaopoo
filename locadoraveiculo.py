@@ -31,7 +31,7 @@ class App(object):
             'combustivel': self.combustivel,
             'marca': self.marca,
             'modelo': self.modelo,
-            'aluguel': self.alugue
+            'aluguel': self.aluguel
         }
         self.AlugueldeCarro.append(alugado)
         print("Carro alugado!!")
