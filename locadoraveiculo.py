@@ -1,4 +1,3 @@
-
 class App(object):
 
     def __init__(self):
@@ -21,7 +20,7 @@ class App(object):
             App.lista_aluguel(self)
 
     def lista_aluguel(self):
-        alugados = {
+        alugado = {
             'nome': self.nome,
             'cpf': self.cpf,
             'placa': self.placa,
@@ -37,7 +36,7 @@ class App(object):
         print("Carro alugado!!")
         print(self.AlugueldeCarro)
 
-        def lista_alugados(self):
+    def lista_alugados(self):
             if len(self.AlugueldeCarro) > 0:
                 for q, loc in enumerate(self.AlugueldeCarro):
                     print(f"Carro {q+1}:")
@@ -54,21 +53,19 @@ class App(object):
                     print(f"Número de veículos alugados é: {len(self.AluguelCarro)}\n")
                 else:
                      print("\nNenhum veículo alugado! ")
-        def menu(self):
-
+    def menu(self):
+        while True:
+            print("Bem Vindo a locadora DESESPERADOS")
+            print("1 - Cadastrar novo veículo")
+            print("2 - Cadastrar novo cliente")
+            print("3 - Locação de veículo")
+            print("4 - Relatório de locação")
+            print("5 - Busca de veículos cadastrados")
+            print("6 - Busca de clientes cadastrados")
+            print("7 - Relatório de veículos cadastrados")
+            print("8 - Relatório de clientes cadastrados")
+            print("9 - Finalizar o programa!  ")
             while True:
-                 print("Bem Vindo a locadora DESESPERADOS")
-                 print("1 - Cadastrar novo veículo")
-                 print("2 - Cadastrar novo cliente")
-                 print("3 - Locação de veículo")
-                 print("4 - Relatório de locação")
-                 print("5 - Busca de veículos cadastrados")
-                 print("6 - Busca de clientes cadastrados")
-                 print("7 - Relatório de veículos cadastrados")
-                 print("8 - Relatório de clientes cadastrados")
-                 print("9 - Finalizar o programa!  ")
- 
-                 while True:
                     try:
                         opc = int(input("\nDigite: "))
                         break
