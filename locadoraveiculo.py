@@ -17,6 +17,8 @@ class App(object):
                 break
             Carro.listar_carro(self)
             Carro.buscar_carros_disponiveis(self)
+            self.nome= str(input("Digite o seu nome: "))
+            self.placa=str(input("Digite a placa: "))
             App.lista_aluguel(self)
 
     def lista_aluguel(self):
@@ -105,17 +107,17 @@ class App(object):
 
 #Classe Veiculo
 class Veiculo(App):
-    def __init__(self, marca, modelo, ano, categoria, transmissao, combustivel):  #função com os atributos necessários
-        self.marca #marca do veículo
-        self.modelo #modelo do veículo
-        self.ano #ano do veículo
-        self.categoria #categorias do veículo
-        self.cambio #o veículo é manual ou automático
-        self.combustivel #o tipo de combustível do veículo
+    def __init__(self, marca, modelo, ano, categoria, cambio, combustivel):  #função com os atributos necessários
+        self.marca=marca #marca do veículo
+        self.modelo=modelo #modelo do veículo
+        self.ano=ano #ano do veículo
+        self.categoria=categoria #categorias do veículo
+        self.cambio=cambio #o veículo é manual ou automático
+        self.combustivel=combustivel #o tipo de combustível do veículo
 
     def listarcarro(self):
-        if len(self.ListadeCarro)>0:
-            for i, car in enumerate(self.ListadeCarro):
+        if len(self.ListadeCarros)>0:
+            for i, car in enumerate(self.ListadeCarros):
                 print(f"Carro {i+1}: ")
                 print(f"Placa: {car['placa']}")
                 print(f"Ano: {car['ano']}")
@@ -126,14 +128,14 @@ class Veiculo(App):
                 print(f"Modelo: {car['modelo']}")
                 print(f"Aluguel:{car['aluguel']}")
 
-            print(f"Total de veículos é: {len(self.ListadeCarro)}\n")
+            print(f"Total de veículos é: {len(self.ListadeCarros)}\n")
         else:
             print("\nOps... Nenhum veículo para listar!")
 
     def buscarcarro(self): #função para buscar carro já cadastrado na locadora
-        if len(self.ListadeCarro) > 0:
+        if len(self.ListadeCarros) > 0:
             self.placa = str(input("Digite a placa: ")).upper() #o carro cadastrado será procurado pela placa informada
-            for car in self.ListadeCarro:
+            for car in self.ListadeCarros:
                 if car['placa'] == self.placa:
                     print(f"Placa: {car['placa']}")
                     print(f"Ano: {car['ano']}")
@@ -148,9 +150,9 @@ class Veiculo(App):
             print("Ops... Nenhum veículo cadastrado")
 
     def buscarcarro_alugar(self): #função para ver a disponibilidade de veículos para alugar
-        if len(self.ListadeCarro)>0:
+        if len(self.ListadeCarros)>0:
             self.placa = str(input("Digite a placa: ")).upper()
-            for car in self.ListadeCarro:
+            for car in self.ListadeCarros:
                 if car['aluguel'] =="ALUGADO":
                     print("Nenhum veículo disponível para alugar!")
                 else:
@@ -172,8 +174,8 @@ class Veiculo(App):
             print("Nenhum veículo disponível para alugar!")
 
     def existecarro(self): #função para saber se existe algum carro cadastrado na locadora com a placa informada 
-        if len(self.ListadeCarro)>0:
-            for car in self.ListadeCarro:
+        if len(self.ListadeCarros)>0:
+            for car in self.ListadeCarros:
                 if car['placa']==self.placa:
                     return True
         return False
@@ -271,15 +273,15 @@ class Veiculo(App):
             'modelo': self.modelo,
             'aluguel': self.aluguel
         }
-        self.ListadeCarro.append(carro)
-        print(self.ListadeCarro)
+        self.ListadeCarros.append(carro)
+        print(self.ListadeCarros)
 
 #Classe Carro
 class Carro(Veiculo):
     def __init__(self, placa, km, valordiaria):
-        self.placa
-        self.km
-        self.valordiaria
+        self.placa=placa
+        self.km=km
+        self.valordiaria=valordiaria
 
 #CLASSE CLIENTE
 class Cliente(App):
