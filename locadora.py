@@ -51,9 +51,56 @@ class App(object):
                 break
         clienteselecionado.consultarhistorico()
         
+    def listar_por_marca(self):
+        lista_por_marca = []
+        for i in range(len(self.ListaCarro)):
+            lista_por_marca.append(self.ListaCarro[i].marca)
+
+        marcas = list(set(lista_por_marca))
+        for marca in marcas:
+            print(marca)
+
+        marca_escolhida = str(input("Qual marca você deseja ver?").upper())
+        for carros in self.ListaCarro:
+            if(carros.marca == marca_escolhida):
+                print("---------------------")
+                print(carros)
+            print("---------------------")
+    def listar_por_ano(self):
+        lista_por_ano = []
+        for i in range(len(self.ListaCarro)):
+            lista_por_ano.append(self.ListaCarro[i].ano)
+
+        anos = list(set(lista_por_ano))
+        for ano in anos:
+            print(ano)
+
+        ano_escolhido = int(input("Qual ano você deseja ver?"))
+        for carros in self.ListaCarro:
+            if(carros.ano == ano_escolhido):
+                print("---------------------")
+                print(carros)           
+            print("---------------------")
+
+    def listar_por_modelo(self):
+        lista_por_modelo = []
+        for i in range(len(self.ListaCarro)):
+            lista_por_modelo.append(self.ListaCarro[i].modelo)
+
+        modelos = list(set(lista_por_modelo))
+        for modelo in modelos:
+            print(modelo)
+
+        modelo_escolhido = str(input("Qual modelo você deseja ver?").upper())
+        for carros in self.ListaCarro:
+            if(carros.modelo == modelo_escolhido):
+                print("---------------------")
+                print(carros)
+            print("---------------------")
+
     def menu(self):
         while True:
-            print("Bem Vindo a locadora DESESPERADOS")
+            print("Bem Vindo a locadora ESPERANÇA")
             print("1- Cadastrar novo veículo")
             print("2- Cadastrar novo cliente")
             print("3- Locação de veículo")
@@ -63,7 +110,11 @@ class App(object):
             print("7- Relatório de veículos cadastrados")
             print("8- Relatório de clientes cadastrados")
             print("9- Histórico de clientes")
+            print("10- Buscar por marca")
+            print("11- Buscar por ano")
+            print("12- Buscar por modelo")
             print("0- Finalizar o programa!")
+           
            
             opc = int(input("\nDigite o número da operação que deseja realizar: "))
                        
@@ -94,6 +145,15 @@ class App(object):
             elif opc == 9:
                 App.mostrar_historico(self)
 
+            elif opc == 10:
+                App.listar_por_marca(self)
+            
+            elif opc == 11:
+                App.listar_por_ano(self)
+            
+            elif opc == 12:
+                App.listar_por_modelo(self)
+
             elif opc == 0: 
                 print("\nFinalizado!")
                 break
@@ -101,11 +161,12 @@ class App(object):
             else:
                 print("\nInválido!\n")
                 break
+            print("\n")
 
 class Veiculo(App):
     def __init__(self, marca, modelo, ano, aluguel):
-        self.marca = marca
-        self.modelo = modelo
+        self.marca = str(marca)
+        self.modelo = str(modelo)
         self.ano = ano
         self.aluguel = aluguel
         self.alugado = False
@@ -153,7 +214,9 @@ class Carro(Veiculo):
     def listar_carro(self):
         if len(self.ListaCarro) > 0:
             for carro in self.ListaCarro:
+                print("---------------------")
                 print (carro)     
+            print("---------------------")
         else:
             print("\nNenhum veículo para listar! ")
 
@@ -214,7 +277,7 @@ class Carro(Veiculo):
         else:
             aluguel = "DISPONIVEL PARA ALUGAR"
 
-        return f"marca: {self.marca}\nmodelo: {self.modelo}\nano: {self.ano}\nplaca: {self.placa}\nkm: {self.km}\nvalordiaria: {self.valordiaria}\n {aluguel}"
+        return f"marca: {self.marca}\nmodelo: {self.modelo}\nano: {self.ano}\nplaca: {self.placa}\nkm: {self.km}\nvalordiaria: {self.valordiaria}\n{aluguel}"
 
 #Classe cliente
 class Cliente(App):
@@ -235,7 +298,9 @@ class Cliente(App):
     def listar_cliente(self):
         if len(self.ListaCliente) > 0:
             for cliente in self.ListaCliente:
+                print("---------------------")
                 print(cliente)
+            print("---------------------")    
         else:
             print("\nNenhum cliente para listar!\n")
  
@@ -276,6 +341,6 @@ class Cliente(App):
         return usuario
 
     def __str__(self):
-        return f"id: {self.id}\nnome: {self.nome}\n"
+        return f"id: {self.id}\nnome: {self.nome}"
     
 App()
